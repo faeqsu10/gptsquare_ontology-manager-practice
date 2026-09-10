@@ -6,7 +6,7 @@
 
 ## 발표 자료
 
-- **[PowerPoint 다운로드](https://faeqsu10.github.io/gptsquare_ontology-manager-practice/ontology-manager-practice.pptx)** — 1~13장 발표, 14~27장 실습 절차, 28~35장 프롬프트. 텍스트·표 편집 가능.
+- **[PowerPoint 다운로드](https://faeqsu10.github.io/gptsquare_ontology-manager-practice/ontology-manager-practice.pptx)** — 1–13장 발표, 14–27장 실습 절차, 28–35장 프롬프트. 텍스트·표 편집 가능.
 - **[HTML 발표 자료 열기](https://faeqsu10.github.io/gptsquare_ontology-manager-practice/)** — 방향키로 이동, 목차에서 원하는 단계 선택, ‘발표 메모’로 설명 확인.
 
 ## 실습 참고 자료
