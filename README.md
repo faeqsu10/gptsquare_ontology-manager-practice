@@ -4,6 +4,8 @@
 
 ## 바로 보기
 
+- **[PowerPoint 다운로드 (.pptx)](https://faeqsu10.github.io/gptsquare_ontology-manager-practice/ontology-manager-practice.pptx)**
+
 - **[발표자료와 실습 부록 열기](https://faeqsu10.github.io/gptsquare_ontology-manager-practice/)**
 - [처음부터 끝까지 따라하기](practice-guide.md)
 - [실습 정리](practice-summary.md)
@@ -11,7 +13,17 @@
 - [AI에게 구현 맡기는 프롬프트](prompt-build.md)
 - [내가 직접 실습하도록 안내받는 프롬프트](prompt-tutor.md)
 
-## 보는 순서
+## PowerPoint 사용
+
+다운로드한 파일을 PowerPoint에서 열면 됩니다. 텍스트와 표는 직접 편집할 수 있으며, 보충 설명은 발표자 노트에 있습니다.
+
+- 1~13장: 발표 본문
+- 14~27장: 설정값과 완료 확인을 담은 실습 절차
+- 28~35장: 구현 요청 / 직접 실습 안내 프롬프트 전문
+
+발표할 때는 앞 13장을 사용하고, 나머지는 실습하거나 질문에 답할 때 참고하세요. HTML의 입력 체험은 PPT에서 입력과 결과를 비교하는 표로 바꿨습니다. 원본 데이터는 별도로 보관하며 포함하지 않습니다.
+
+## HTML 보는 순서
 
 1. 발표자료 1~13페이지에서 설계 배경과 두 가지 AI FDE 활용 방식을 봅니다.
 2. 직접 실습할 때는 14페이지부터의 순서형 부록 또는 따라하기 MD를 펼칩니다.
