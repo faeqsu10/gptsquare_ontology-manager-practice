@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>판단을 구조로 — Ontology Manager 실습 공유</title>
+<style>
+:root{--bg:#f7f9f6;--panel:#ffffff;--line:#cbd6d0;--text:#182b25;--muted:#4c6258;--mint:#17694e;--orange:#92520b;--red:#b32c32}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;word-break:keep-all;line-height:1.5}button,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--orange);outline-offset:4px}header{height:70px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4vw;gap:12px}.brand{font-size:13px;letter-spacing:2px;color:var(--mint)}.tools{display:flex;gap:8px}button{background:transparent;border:1px solid var(--line);color:var(--text);padding:8px 15px;border-radius:7px}button:hover{background:#e4ede7}button:disabled{opacity:.3;cursor:default}.slide{max-width:1440px;margin:auto;padding:40px 5vw 90px;min-height:calc(100svh - 70px)}[hidden]{display:none!important}.eyebrow{color:var(--mint);font-size:13px;font-weight:bold;letter-spacing:2px;margin:0 0 13px}h1,h2,h3,p{margin-top:0}h1{font-size:4.5rem;line-height:1.2;letter-spacing:-3px;margin-bottom:25px}h2{font-size:3rem;line-height:1.3;letter-spacing:-1.5px;margin-bottom:16px}h3{font-size:22px;margin-bottom:12px}.lead{color:var(--muted);font-size:1.5rem;margin-bottom:28px}.accent{color:var(--mint)}.grid{display:grid;gap:18px}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}.card{padding:25px;border:1px solid var(--line);border-radius:13px;background:var(--panel)}.card p:last-child{margin-bottom:0}.card p,.card li{color:var(--muted);font-size:18px}.num{display:block;color:var(--mint);font-size:13px;letter-spacing:2px;margin-bottom:22px}.statement{border-left:4px solid var(--mint);padding:12px 22px;margin:25px 0 0;font-size:23px;background:#e5f1e9}.small{font-size:13px!important;color:var(--muted)}.tag{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:4px 11px;color:var(--muted);font-size:13px;margin:0 5px 8px 0}.tag.ok{color:var(--mint);border-color:#9cc4ac}.tag.warn{color:var(--orange);border-color:#d4b38a}.flow{display:flex;align-items:stretch;gap:12px;margin:25px 0}.flow .card{flex:1}.arrow{display:flex;align-items:center;color:var(--mint);font-size:25px}.big{font-size:42px;color:var(--mint);line-height:1.2}.metric{display:flex;gap:32px;margin:25px 0}.metric small{display:block;font-size:14px;color:var(--muted);margin-top:8px}table{border-collapse:collapse;width:100%;font-size:18px}th,td{padding:15px 12px;text-align:left;border-bottom:1px solid var(--line)}th{font-size:13px;color:var(--mint);font-weight:normal}td{color:var(--muted)}td:first-child{color:var(--text)}code{font-family:Consolas,monospace;overflow-wrap:anywhere;font-size:.85em;color:var(--mint)}.bad{color:var(--red)}.good{color:var(--mint)}.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.timeline .card{padding:22px}.timeline strong{display:block;font-size:20px;margin:10px 0}.timeline p{font-size:16px}.rule{font-size:22px;line-height:1.8}.rule b{color:var(--orange)}label{display:block;font-size:14px;color:var(--muted);margin:12px 0 6px}select,textarea{width:100%;background:var(--bg);border:1px solid #9cb2a5;border-radius:6px;color:var(--text);padding:10px}textarea{resize:vertical;min-height:75px}.primary{background:var(--mint);border-color:var(--mint);color:#ffffff;font-weight:bold}.primary:hover{background:#105039}.result{min-height:180px}.result p{font-size:17px}.result dl{display:grid;grid-template-columns:100px 1fr;gap:8px;font-size:16px}.result dt{color:var(--muted)}.result dd{margin:0;overflow-wrap:anywhere}#feedback{font-size:15px;margin:12px 0;min-height:24px}footer{position:fixed;bottom:0;left:0;right:0;background:var(--bg);height:63px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4vw;z-index:5}.progress{position:absolute;top:-3px;left:0;height:3px;background:var(--mint);transition:width .15s}.nav{display:flex;align-items:center;gap:14px}#counter{font-size:13px;color:var(--muted);min-width:48px;text-align:center}.dots{display:flex;gap:4px;max-width:28vw;flex-wrap:wrap}.dots button{padding:0;width:9px;height:9px;border-radius:50%;background:#b5c6bc}.dots button[aria-current="step"]{background:var(--mint);border-color:var(--mint)}#notes{position:fixed;z-index:10;bottom:75px;right:4vw;max-width:650px;width:90vw;background:#edf3ee;color:#163127;border:1px solid #adc6b6;box-shadow:0 12px 50px #18372b33;border-radius:12px;padding:24px;font-size:18px}#notes h3{font-size:15px;color:#315548}#notes p{margin-bottom:0}dialog{color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:14px;width:min(92vw,650px);max-height:85vh}dialog::backdrop{background:#18372b66}#tocList{display:grid;gap:8px;margin:20px 0}#tocList button{text-align:left;padding:12px}.source{margin-top:25px;font-size:13px;color:var(--muted)}.source a{color:var(--mint)}.cover{padding-top:7vh}.cover .three{margin-top:40px}.cover .card{background:var(--panel)}.cover h3{font-size:24px}.cover .card p{font-size:17px}.section-num{font-size:90px;color:#365750;line-height:1;margin-bottom:10px}body.overview .slide{display:block!important;border-bottom:1px solid var(--line);min-height:auto;padding-bottom:65px}body.overview footer{position:sticky}body.overview .progress{display:none}
+@media(max-width:800px){h1{font-size:2.5rem}h2{font-size:1.9rem}.lead{font-size:1.1rem}.tools{flex-wrap:wrap;justify-content:flex-end}header{padding:0 18px;height:auto;min-height:64px}.brand{font-size:10px;letter-spacing:1px}.tools button{font-size:12px;padding:7px}.slide{padding:30px 22px 95px}.two,.three,.four,.timeline{grid-template-columns:1fr}.flow{flex-direction:column}.arrow{justify-content:center;transform:rotate(90deg)}.card{padding:20px}h1{letter-spacing:-1.5px}.cover{padding-top:35px}.cover .three{margin-top:25px}.statement{font-size:19px}.dots{display:none}.footer-hint{font-size:11px}.nav{gap:5px}.nav button{padding:7px 10px}table{font-size:15px}th,td{padding:12px 7px}.metric{gap:25px}.big{font-size:35px}.lead{margin-bottom:22px}}
+@media print{@page{size:landscape;margin:12mm}body{background:#fff;color:#152722}header,footer,#notes,dialog,.demo-controls{display:none!important}.slide,.slide[hidden]{display:block!important;min-height:0;break-after:page;padding:12px 15px;max-width:none}.slide:last-child{break-after:auto}.card{background:#f5f8f5;border-color:#b7c9bf;color:#152722}.card p,.lead,td,.small,.source,.tag{color:#42594f!important}h1{font-size:49px}h2{font-size:32px}.accent,.eyebrow,.num,code,.good,.big,th{color:#24634c}.statement{background:#f1f7f3;font-size:20px}.cover{padding-top:25px}.tag{border-color:#aabbb2}.card{padding:18px}.flow{margin:18px 0}.source{margin-top:12px}}
+.prompt-full summary{cursor:pointer;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}.prompt-full pre{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;font:16px/1.8 Arial,"Malgun Gothic",sans-serif;padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:8px}.prompt-full[open]{margin-bottom:30px}
+.public-note{padding:8px 4vw;background:#e5f1e9;color:#355747;font-size:12px;line-height:1.6}.share-home{color:var(--mint)}@media print{.public-note{font-size:9pt}}
+</style>
+</head>
+<body>
+<div class="public-note">공개 공유본: 배치 ID·측정값·일부 수량·경로는 설명용 예시로 바꿨습니다. 예시 값은 원본 행 또는 실제 운영 결과의 증거가 아닙니다. 원본 CSV·책 본문·계정 정보는 포함하지 않습니다.</div>
+<header><div class="brand">FOUNDRY STUDY / CHAPTER 10</div><div class="tools"><button id="tocBtn">목차</button><button id="notesBtn" aria-pressed="false">발표 메모</button><button id="allBtn" aria-pressed="false">전체 보기</button><button id="fitBtn">한 화면 맞춤</button><button id="fullBtn">전체 화면</button></div></header>
+<main>
+<section aria-labelledby="heading-1" class="slide cover" data-title="책에서 실습으로">
+<p class="eyebrow">2026.09.09 · ONTOLOGY MANAGER</p><h1 id="heading-1">판단을 구조로.<br><span class="accent">배치 출하 검토</span>를 만들어 보다</h1><p class="lead">책과 데이터를 읽고 유즈케이스를 정한 뒤,<br>공유 환경에서 AI FDE와 직접 실습으로 이어간 과정</p>
+<div class="grid three"><div class="card"><span class="num">01 / BOOK</span><h3>설계의 기준을 배우다</h3><p>무엇을 객체·관계·행동으로 정할까?</p></div><div class="card"><span class="num">02 / AI FDE</span><h3>업무를 말로 요청하다</h3><p>어떻게 요청하고 결과를 확인할까?</p></div><div class="card"><span class="num">03 / HANDS-ON</span><h3>직접 연결하고 실행하다</h3><p>액션을 누르면 무엇이 달라질까?</p></div></div>
+<aside hidden class="speaker">오늘은 기능을 모두 소개하기보다, 작은 업무 하나를 구현하며 이해한 내용을 공유합니다. 마지막에는 배치의 검사 결과를 보고 사람이 판단을 기록하는 흐름을 설명할 수 있는 것이 목표입니다.</aside>
+</section>
+<section aria-labelledby="heading-2" class="slide" hidden data-title="Chapter 10의 주요 내용"><p class="eyebrow">01 / BOOK · CHAPTER 10, p.133–149</p><h2 id="heading-2">온톨로지 매니저에서<br>판단의 구조와 운영 기준을 정한다</h2><div class="grid three"><div class="card"><h3>객체·링크·액션</h3><p>판단 대상, 판단 맥락, 판단 결과를 하나의 흐름으로 구성한다.</p></div><div class="card"><h3>시스템 데이터 재매핑</h3><p>ERP·MES·SCM의 테이블을 그대로 옮기지 않고 판단 단위로 재구성한다.</p></div><div class="card"><h3>최소 연결</h3><p>현재 판단과 행동에 필요한 관계부터 연결한다.</p></div><div class="card"><h3>액션과 함수</h3><p>조건·책임자·변경 결과를 정하고, 함수로 판단 근거와 사유를 표현한다.</p></div><div class="card"><h3>시간과 권한</h3><p>과거 이슈와 현재 상태를 구분하고, 누가 제안·실행할지 정한다.</p></div><div class="card"><h3>운영 중 개선</h3><p>현업과 함께 상태·액션을 조정하고, 각 구조의 존재 이유를 설명한다.</p></div></div><p class="source">책의 Chapter 10 장별 학습 노트 재확인 · 아래 실습은 이 중 배치 검토 기록을 작게 구현한 사례</p><aside hidden class="speaker">이 장을 단순한 설정 메뉴 안내로 소개하지 않습니다. 초반은 객체·링크·액션의 의미, 중반은 시스템 데이터를 판단 단위로 재구성하는 방법과 최소 연결, 후반은 함수·시간·권한·운영 중 실수를 다룹니다. 현업을 공동 설계자로 참여시키고 계속 조정해야 한다는 점까지가 장의 범위입니다.</aside></section>
+<section aria-labelledby="heading-3" class="slide" hidden data-title="이번에 만든 것과 다음에 만들 기능">
+<p class="eyebrow">01 / BOOK → PRACTICE</p><h2 id="heading-3">이번에는 검토 결과를 기록하고,<br>다음에는 검토 과정까지 관리해 볼 수 있다</h2>
+<table><thead><tr><th scope="col">책에서 가져온 관점</th><th scope="col">이번에 해 본 것</th><th scope="col">다음에 더 만들어 볼 기능 · 아직 미구현</th></tr></thead><tbody>
+<tr><td>검토할 대상을 정하기</td><td>배치와 품질검사를 연결</td><td><strong class="accent">재검사부터 검토 완료까지 한 건으로 관리</strong><br><span class="small">예: 불합격 발견 → 재검사 요청 → 결과 확인 → 완료</span></td></tr>
+<tr><td>판단 근거를 정리하기</td><td>사람이 검사 결과를 보고 사유 입력</td><td><strong class="accent">시스템이 여러 결과를 모아 검토할 이유를 알려주기</strong><br><span class="small">예: “점도는 합격, 내용량은 불합격 → 내용량 재검사 필요”</span></td></tr>
+<tr><td>누가 언제 행동할지 정하기</td><td>보류할 때 사유를 받고 실행자 기록</td><td><strong class="accent">상태와 담당자에 따라 가능한 버튼을 정하기</strong><br><span class="small">예: 보류 상태에서는 재검토 가능 · 최종 승인은 지정 담당자만</span></td></tr>
+<tr><td>지금과 과거를 구분하기</td><td>판정한 시각 기록</td><td><strong class="accent">현재 상태와 이전 판단을 함께 남기기</strong><br><span class="small">예: 어제 보류 → 오늘 승인 · 현재는 승인, 어제 보류 사유도 조회</span></td></tr>
+</tbody></table><div class="statement">지금은 “검토 결과 저장”까지. 다음에는 “재검사 → 승인 → 과정 기록”으로 넓혀 볼 수 있다.</div>
+<p class="small" style="margin-top:16px">시스템이 검토 이유를 정리해도 최종 판단은 사람이 한다. 불량률까지 활용하려면 데이터와 계산·판정 기준을 먼저 확인해야 한다.</p>
+<aside hidden class="speaker">오른쪽은 아직 만들지 않은 다음 실습 아이디어입니다. 첫째, 출하 케이스는 검토할 일을 한 건으로 묶는 것입니다. 불합격을 발견한 뒤 재검사를 요청하고 결과를 확인해 완료할 때까지 관리합니다. 둘째, 종합 판정 함수는 여러 검사 결과를 함께 읽고 왜 검토가 필요한지 알려주는 계산입니다. 점도 합격, 내용량 불합격이라면 내용량 재검사 필요라고 설명하게 합니다. 불량률은 데이터와 기준을 먼저 확인해야 합니다. 셋째, 실행 조건과 권한은 지금 상태에서 누가 어떤 버튼을 누를 수 있는지 정하는 것입니다. 예를 들어 보류 중에는 재검토할 수 있고 최종 승인은 지정 담당자만 하게 합니다. 넷째, 현재 상태와 이력은 지금 적용되는 판단과 과거 판단을 함께 남기는 것입니다. 어제 김 담당자가 보류하고 오늘 이 담당자가 승인했다면 현재는 승인이고, 어제 보류한 이유도 찾아볼 수 있게 합니다. 이번에 해 본 것은 배치에 검토 결과를 기록하는 흐름입니다.</aside>
+</section>
+<section aria-labelledby="heading-4" class="slide" hidden data-title="데이터 불일치 설명용 예시">
+<p class="eyebrow">02 / DATA REVIEW · 공개용 예시 데이터</p><h2 id="heading-4">예시 값을 나란히 보면,<br>추가 확인이 필요한 부분이 보였다</h2>
+<div class="grid two"><div class="card"><h3>① 불량 유형은 ‘없음’, 수량은 양수</h3><table><thead><tr><th>배치 ID</th><th>불량 유형</th><th>불량 수량</th></tr></thead><tbody><tr><td>DEMO-01-02</td><td>없음</td><td class="bad">12</td></tr><tr><td>DEMO-02-01</td><td>없음</td><td class="bad">34</td></tr><tr><td>DEMO-02-02</td><td>없음</td><td class="bad">56</td></tr></tbody></table><p style="margin-top:18px"><strong class="accent">이런 조합이 18건 / 30건</strong><br>‘없음’의 의미와 수량의 기준을 확인해야 한다.</p><p class="small">출처: 08.defect_summary.csv · 설명용으로 재구성한 3행</p></div>
+<div class="card"><h3>② 측정값만으로 합불 기준을 알기 어려움</h3><table><thead><tr><th>배치 ID</th><th>내용량 측정값</th><th>검사 결과</th></tr></thead><tbody><tr><td>DEMO-04-01</td><td>97.40</td><td>합격</td></tr><tr><td>DEMO-01-02</td><td>98.20</td><td class="bad">불합격</td></tr><tr><td>DEMO-02-02</td><td>98.21</td><td>합격</td></tr></tbody></table><p style="margin-top:18px">합격·불합격 측정값의 범위가 겹친다.<br>규격·판정 기준 없이 새 기준을 정할 수 없다.</p><p class="small">출처: 07.quality_inspection.csv · 내용량 검사 예시 3행</p></div></div>
+<div class="statement">값을 임의로 고치기보다 → 근거를 확인하고 → 사람의 검토 결과를 남기자.</div><p class="small" style="margin-top:15px">이 밖에도 시간 지표 간 불일치, 한글 손상, 설비·센서의 배치 연결 키 부재를 확인했다.</p>
+<aside hidden class="speaker">왼쪽은 불량요약 구조를 보여주는 예시 세 행입니다. 유형은 없음인데 수량이 12, 34, 56로 기록돼 있습니다. 이런 조합이 30건 중 18건이라 의미를 확인해야 합니다. 수량을 0으로 바꾸거나 유형을 미분류로 정하는 것은 별도의 규칙 결정입니다. 오른쪽은 내용량 검사 예시 세 행입니다. 97.40은 합격, 98.20은 불합격, 98.21은 합격입니다. 제품별 기준 등이 다를 수 있으므로 판정 자체가 틀렸다고 단정할 수 없습니다. 측정값만으로 공통 기준을 추측해 자동 재판정하지 않고 원본 결과를 유지했습니다. 다른 시간 지표 불일치와 연결 한계도 있어 사람이 근거를 확인하는 검토 사례를 선택했습니다.</aside></section>
+<section aria-labelledby="heading-5" class="slide" hidden data-title="왜 배치 출하 검토인가"><p class="eyebrow">02 / USE CASE · 관찰에서 설계로</p><h2 id="heading-5">데이터 확인이 필요한 상황을<br>사람의 검토와 기록으로 연결했다</h2><div class="flow"><div class="card"><h3>관찰</h3><p>품질 불합격 8건이 있지만,<br>원천 출하 상태는 모두 완료로 해석된다.</p></div><span class="arrow">→</span><div class="card"><h3>질문</h3><p>검사 근거와 데이터의 불확실성을<br>누가 확인하고 판단할 것인가?</p></div><span class="arrow">→</span><div class="card"><h3>유즈케이스</h3><p>배치를 열어 검사 근거를 보고,<br>검토 상태와 이유를 남긴다.</p></div></div><table><thead><tr><th>DEMO-01-02의 기록</th><th>공개용 예시 값</th><th>출처</th></tr></thead><tbody><tr><td>내용량 검사</td><td><span class="bad">불합격</span> · 98.20</td><td>07.quality_inspection.csv</td></tr><tr><td>불량요약</td><td>유형 없음 · 수량 12</td><td>08.defect_summary.csv</td></tr><tr><td>출하실적</td><td>SHIP-DEMO-001 · 출하일 2025-01-02</td><td>11.shipment_order → 12.shipment_result</td></tr></tbody></table><p class="small" style="margin-top:15px">검사·불량은 batch_id로, 출하실적은 출하계획의 shipment_id를 거쳐 연결했다.</p><p class="small" style="margin-top:12px">과거 데이터로 출하 전 검토 상황을 재현하는 학습 사례다. 검사·출하 시점과 업무 규칙이 부족하므로 실제 부적합 출하로 단정하지 않는다. 출하 완료는 손상된 원본 상태의 문서화된 복원 매핑에 따른 해석이다.</p><aside hidden class="speaker">검사에는 불합격이 있지만 출하실적은 완료로 해석되는 기록입니다. 이것만으로 실제 잘못 출하했다고 말할 수는 없습니다. 재검사나 예외 승인 이력이 없기 때문입니다. 그래서 원천 출하 상태를 덮어쓰기보다, 데이터를 확인한 사람의 검토 결과를 별도로 남기는 사례를 만들었습니다. 불량요약 등 모든 불일치를 자동 검사하는 기능을 이미 구현한 것은 아닙니다.</aside></section>
+<section aria-labelledby="heading-6" class="slide" hidden data-title="선택한 유즈케이스">
+<p class="eyebrow">02 / USE CASE · 배치 출하 검토</p><h2 id="heading-6">검사 결과를 보고,<br>사람이 검토 결과를 남긴다</h2><div class="flow"><div class="card"><span class="num">대상</span><h3>배치 선택</h3><p><code>DEMO-01-02</code></p></div><span class="arrow" aria-hidden="true">→</span><div class="card"><span class="num">근거</span><h3>검사 확인</h3><p>내용량 <span class="bad">불합격</span><br>점도 <span class="good">합격</span></p></div><span class="arrow" aria-hidden="true">→</span><div class="card"><span class="num">판단</span><h3>검토 결과 선택</h3><p>검토중 · 보류 · 승인</p></div><span class="arrow" aria-hidden="true">→</span><div class="card"><span class="num">결과</span><h3>판단 기록</h3><p>상태 · 사유<br>판정자 · 판정 시각</p></div></div>
+<div class="grid two"><div class="card"><h3>범위를 작게 잡았다</h3><p>배치와 검사로 시작해, 한 번의 판단이 실제 속성 변경으로 이어지는지 확인했다.</p></div><div class="card"><h3>실습에서 구현한 행동</h3><p>출하 검토 결과를 기록한다. 실제 물류 시스템의 출하 차단 연동은 후속 범위다.</p></div></div>
+<aside hidden class="speaker">배치를 열고 검사를 확인한 다음 사람이 보류를 선택합니다. 검사 불합격이 자동으로 보류를 실행하는 구성은 아닙니다. 보류를 기록하는 액션 자체가 이번에 구현한 행동입니다. 책의 Shipment Case나 종합 판정 함수 전체를 복제하지는 않았습니다.</aside>
+</section>
+<section aria-labelledby="heading-7" class="slide" hidden data-title="공유 환경에서 브랜치 실습">
+<p class="eyebrow">03 / SHARED ENVIRONMENT · 공유 환경 사용 경험</p><h2 id="heading-7">공유 Foundry 환경에서<br>브랜치를 만들어 실습했다</h2><p class="lead">브랜치에서 데이터를 준비하고, 객체·링크·액션을 설정해 봤다.</p>
+<div class="grid three"><div class="card"><span class="num">01</span><h3>공유 환경 참여</h3><p>공유 Foundry 환경에 들어갔다.</p></div><div class="card"><span class="num">02</span><h3>실습용 브랜치 생성</h3><p>내가 작업할 브랜치를 만들었다.</p></div><div class="card"><span class="num">03</span><h3>직접 설정·실행</h3><p>데이터를 준비하고,<br>객체·링크·액션을 설정해 봤다.</p></div></div>
+<aside hidden class="speaker">공유 환경에 참여해 제 브랜치를 만들고 실습했습니다. 다음으로 이 환경에서 AI FDE를 어떻게 사용했는지 말씀드리겠습니다. 참고 기록: review-practice에서는 검사 조회, 액션 제출, 속성 반영까지 확인했습니다. review-practice-repeat은 새로 재실습한 브랜치이며 최종 실행 완료는 별도 확인이 필요합니다. 브랜치별 완료 상태는 질문이 있을 때 설명합니다.</aside></section>
+<section aria-labelledby="heading-8" class="slide" hidden data-title="AI에게 구현 맡기기"><p class="eyebrow">04 / AI FDE · 두 가지 사용 방식</p><h2 id="heading-8">① AI에게 직접 만들어 보라고 요청했다</h2><p class="lead">목적: 요구사항을 실제 자산으로 얼마나 잘 구현하는지 보기</p><div class="grid two"><div class="card"><span class="tag">핵심 요청 · 재구성</span><h3>데이터와 설계 원칙을 바탕으로<br>파이프라인과 객체·링크·액션을 직접 만들어 줘.</h3><p>AI가 구현 · 나는 만들어진 결과 확인</p></div><div class="card"><h3>함께 전달한 공통 맥락</h3><p>배치 출하 검토 유즈케이스<br>사용할 데이터와 불일치·연결 한계<br>책의 원칙과 객체·링크·액션의 목표 구조</p></div></div><p class="small" style="margin-top:16px">다음에 해볼 것: 만든 결과의 누락 검토 요청 · 실행 위치와 결과 확인 방법 질문</p><details class="prompt-full" style="margin-top:22px"><summary><strong>프롬프트 전문 펼쳐보기 · 재구성본</strong></summary><p class="small">실제 과거 입력문의 직접 인용이 아니다. 복사할 때 현재 프로젝트·브랜치·Dataset을 지정한다.</p><pre>나는 AI FDE가 요구사항을 실제 Foundry 자산으로 얼마나 잘 구현하는지 확인하려고 한다.
+너는 이번 실습의 구현 담당자다. 아래 내용을 바탕으로 파이프라인과 온톨로지를 직접 만들어라.
+이 요청은 단계별 클릭 안내가 아니라, 실습 브랜치 안에서 구현하고 결과를 보고하는 요청이다.
+
+[업무와 데이터]
+화장품 제조 배치의 품질검사 결과를 사람이 확인하고, 출하 검토 결과를 기록하는 실습이다.
+최종 판단은 사람이 하며 검토 상태, 보류 사유, 판정자, 판정 시각을 남긴다.
+실제 물류 시스템의 출하를 차단하거나 자동 승인하는 기능은 범위에 넣지 않는다.
+
+현재 선택한 프로젝트와 작업 브랜치를 먼저 확인하고, 내가 지정하거나 첨부한 Dataset을 사용해라.
+필요한 원본은 batch_master와 quality_inspection이다. 환경에 있는 실제 이름과 스키마를 확인해라.
+기존 자산은 이름뿐 아니라 데이터 소스·기본키·브랜치가 같은지 확인한 뒤 재사용해라.
+
+로컬 스터디 데이터 점검 결과는 아래와 같다. Foundry에서도 같은지 확인해라.
+- 배치 30건, 품질검사 60건이며 검사.batch_id로 배치와 연결된다.
+- 검사 결과는 합격52건·불합격8건이며 불합격은 내용량 항목에 있다.
+- 측정값만으로 공통 합불 기준을 확정할 수 없다.
+- 불량 유형이 없음인데 불량 수량이 양수인 행이18건 있다.
+- 일부 문자열 손상과 시간 지표 불일치가 있다.
+- 설비·센서에는 배치와 직접 연결할 키가 없다.
+원본을 임의 보정하거나 연결 키를 추측하지 말고, 확인된 사실과 가정을 구분해라.
+이번에 필요한 값·키·관계부터 확인하고 전체 데이터를 무조건 정제하지 마라.
+
+[적용할 설계 원칙 — 책의 Chapter 10에서 가져온 관점]
+1. 액션부터 생각한다. 누가, 어떤 조건에서, 무엇을 입력하고, 실행 후 무엇이 바뀌는지 정한다.
+2. Dataset마다 객체를 만들지 말고, 지금 판단할 대상과 필요한 근거만 객체로 둔다.
+3. 링크는 판단에 필요한 관계만 연결하고, 각 연결의 이유를 설명한다.
+4. 원천 검사 사실·계산 결과·사람이 결정한 검토 상태를 구분한다.
+5. 판단에는 사유를 남기며, 실행 조건과 자동 실행 트리거를 혼동하지 않는다.
+6. 과거 검사와 현재 검토 상태를 구분한다. 판정 시각 기록만으로 전체 이력이 보존된다고 설명하지 않는다.
+7. 임계치와 승인 정책을 근거 없이 확정하지 않는다.
+
+[이번 실습의 목표 구조]
+- 배치출하검토 Object Type: batch_master 사용, Primary key와 Title은 batch_id.
+- 품질검사 Object Type: inspection_id를 포함한 출력 Dataset 사용, Primary key와 Title은 inspection_id.
+- inspection_id가 없다면 Pipeline Builder로 batch_id + &#x27;::&#x27; + test_item을 만든다.
+  현재 데이터에서 고유성을 확인하고, 중복이면 회차·실제 검사 ID를 확인한 뒤 설계를 정한다.
+- 배치1 : 검사N 링크: 품질검사의 batch_id → 배치출하검토의 batch_id.
+- 배치에 Edit-only 속성4개: 검토 상태(String), 보류 사유(String), 판정자(String), 판정 시각(Timestamp).
+- 배치의 편집 허용과 현재 사용자의 실행 권한을 각각 확인한다.
+- 액션 이름: 출하 검토 기록. 기존 배치를 수정하는 Modify object 규칙을 사용한다.
+- 입력: 대상 배치1개, 검토 상태(검토중/보류/승인), 보류 사유.
+- 검토 상태는 필수. 보류 사유는 보류를 선택한 때만 필수.
+- 입력한 상태·사유를 배치에 저장하고 판정자=Current User, 판정 시각=Current Time을 기록한다.
+- 중복 보류 금지, 역할별 승인, 전체 변경 이력 관리는 후속 실습으로 남긴다.
+
+[진행과 작업 범위]
+현재 환경과 자산을 조사한 뒤, 짧게 구현 계획을 설명하고 가능한 구현을 진행해라.
+프로젝트·브랜치·입력 Dataset을 특정할 수 없으면 그 정보만 먼저 질문해라.
+선택한 실습 브랜치에서 생성·설정·저장과 파이프라인 빌드를 진행한다.
+관련 없는 자산을 수정·삭제하지 말고 Main 병합이나 외부 시스템 호출은 하지 마라.
+실제 객체에 검토 결과를 저장하는 Submit은 이 요청에 포함하지 않는다. Test run과 구분해라.
+
+[구현 결과 보고]
+1. 만든 자산과 재사용한 자산: 이름, 종류, 링크, 브랜치.
+2. 설정 요약: 데이터 소스, 기본키, 속성 타입, 관계 키, 액션 입력과 변경 결과.
+3. 실제 확인한 결과: 출력 행 수·키 고유성, 객체 조회, 연결 검사, 필수 입력 조건.
+4. 가능하면 Test run으로 변경 예정 값을 확인하고 실제 저장 여부와 구분해라.
+5. 완료한 것, 오류로 막힌 것, 아직 검증하지 않은 것을 나눠 보고해라.
+만들지 못한 것을 제안만 하고 완료했다고 말하지 마라.
+</pre></details><p class="source"><a href="prompt-build.md">프롬프트 MD 열기</a></p><aside hidden class="speaker">AI FDE를 두 가지 방식으로 사용했습니다. 첫 번째는 데이터와 책의 설계 원칙을 주고 직접 만들어 보라고 요청한 방식입니다. AI가 얼마나 구현할 수 있는지 보고 싶었습니다. 여기의 전문은 당시 문구의 인용이 아니라 경험을 바탕으로 다듬은 재구성본입니다. 생성 결과 전체의 검토를 다시 요청하거나 사용 절차를 묻는 것은 다음에 해볼 단계입니다.</aside></section>
+<section aria-labelledby="heading-9" class="slide" hidden data-title="직접 실습 안내받기"><p class="eyebrow">04 / AI FDE · 두 가지 사용 방식</p><h2 id="heading-9">② 내가 직접 만들 수 있도록 안내받았다</h2><p class="lead">목적: 설정의 의미를 이해하고 직접 클릭하며 배우기</p><div class="grid two"><div class="card"><span class="tag">핵심 요청 · 재구성</span><h3>무엇을 하는지, 어디를 누르고 무엇을 입력할지,<br>성공했는지 확인하는 방법을 한 단계씩 알려 줘.</h3><p>AI는 안내 · 내가 직접 설정·실행</p></div><div class="card"><h3>함께 전달한 공통 맥락</h3><p>배치 출하 검토 유즈케이스<br>사용할 데이터와 불일치·연결 한계<br>책의 원칙과 객체·링크·액션의 목표 구조</p></div></div><p class="small" style="margin-top:16px">입력값뿐 아니라 Description·타입·키·저장·완료 확인까지 안내받도록 요청한다.</p><details class="prompt-full" style="margin-top:22px"><summary><strong>프롬프트 전문 펼쳐보기 · 재구성본</strong></summary><p class="small">실제 과거 입력문의 직접 인용이 아니다. 복사할 때 현재 프로젝트·브랜치·Dataset을 지정한다.</p><pre>나는 Foundry 초보자이며 직접 클릭하고 입력하면서 Ontology Manager를 배우고 싶다.
+너는 내가 실습할 수 있도록 안내하는 튜터 역할을 해라.
+내가 별도로 요청하지 않는 한 대신 자산을 생성·수정하거나 액션을 제출하지 마라.
+
+[업무와 데이터]
+화장품 제조 배치의 품질검사 결과를 사람이 확인하고, 출하 검토 결과를 기록하는 실습이다.
+최종 판단은 사람이 하며 검토 상태, 보류 사유, 판정자, 판정 시각을 남긴다.
+실제 물류 시스템의 출하를 차단하거나 자동 승인하는 기능은 범위에 넣지 않는다.
+
+현재 선택한 프로젝트와 작업 브랜치를 먼저 확인하고, 내가 지정하거나 첨부한 Dataset을 사용해라.
+필요한 원본은 batch_master와 quality_inspection이다. 환경에 있는 실제 이름과 스키마를 확인해라.
+기존 자산은 이름뿐 아니라 데이터 소스·기본키·브랜치가 같은지 확인한 뒤 재사용해라.
+
+로컬 스터디 데이터 점검 결과는 아래와 같다. Foundry에서도 같은지 확인해라.
+- 배치 30건, 품질검사 60건이며 검사.batch_id로 배치와 연결된다.
+- 검사 결과는 합격52건·불합격8건이며 불합격은 내용량 항목에 있다.
+- 측정값만으로 공통 합불 기준을 확정할 수 없다.
+- 불량 유형이 없음인데 불량 수량이 양수인 행이18건 있다.
+- 일부 문자열 손상과 시간 지표 불일치가 있다.
+- 설비·센서에는 배치와 직접 연결할 키가 없다.
+원본을 임의 보정하거나 연결 키를 추측하지 말고, 확인된 사실과 가정을 구분해라.
+이번에 필요한 값·키·관계부터 확인하고 전체 데이터를 무조건 정제하지 마라.
+
+[적용할 설계 원칙 — 책의 Chapter 10에서 가져온 관점]
+1. 액션부터 생각한다. 누가, 어떤 조건에서, 무엇을 입력하고, 실행 후 무엇이 바뀌는지 정한다.
+2. Dataset마다 객체를 만들지 말고, 지금 판단할 대상과 필요한 근거만 객체로 둔다.
+3. 링크는 판단에 필요한 관계만 연결하고, 각 연결의 이유를 설명한다.
+4. 원천 검사 사실·계산 결과·사람이 결정한 검토 상태를 구분한다.
+5. 판단에는 사유를 남기며, 실행 조건과 자동 실행 트리거를 혼동하지 않는다.
+6. 과거 검사와 현재 검토 상태를 구분한다. 판정 시각 기록만으로 전체 이력이 보존된다고 설명하지 않는다.
+7. 임계치와 승인 정책을 근거 없이 확정하지 않는다.
+
+[이번 실습의 목표 구조]
+- 배치출하검토 Object Type: batch_master 사용, Primary key와 Title은 batch_id.
+- 품질검사 Object Type: inspection_id를 포함한 출력 Dataset 사용, Primary key와 Title은 inspection_id.
+- inspection_id가 없다면 Pipeline Builder로 batch_id + &#x27;::&#x27; + test_item을 만든다.
+  현재 데이터에서 고유성을 확인하고, 중복이면 회차·실제 검사 ID를 확인한 뒤 설계를 정한다.
+- 배치1 : 검사N 링크: 품질검사의 batch_id → 배치출하검토의 batch_id.
+- 배치에 Edit-only 속성4개: 검토 상태(String), 보류 사유(String), 판정자(String), 판정 시각(Timestamp).
+- 배치의 편집 허용과 현재 사용자의 실행 권한을 각각 확인한다.
+- 액션 이름: 출하 검토 기록. 기존 배치를 수정하는 Modify object 규칙을 사용한다.
+- 입력: 대상 배치1개, 검토 상태(검토중/보류/승인), 보류 사유.
+- 검토 상태는 필수. 보류 사유는 보류를 선택한 때만 필수.
+- 입력한 상태·사유를 배치에 저장하고 판정자=Current User, 판정 시각=Current Time을 기록한다.
+- 중복 보류 금지, 역할별 승인, 전체 변경 이력 관리는 후속 실습으로 남긴다.
+
+[안내 순서]
+브랜치·원본 확인 → Pipeline Builder → Object Type → Property → Link Type
+→ Action Type → 입력 조건 → 저장·조회·Test run → 실제 실행과 결과 확인 순서로 안내해라.
+
+[매 단계의 설명 방식]
+- 지금 무엇을 하는지와 왜 필요한지 쉬운 말로 설명해라.
+- 현재 화면에서 어디를 클릭하는지 정확히 말해라.
+- 이름, Description, API 이름, 타입, 컬럼, 기본키, Title 등 입력·선택할 값을 빠뜨리지 마라.
+- 설정 후 어디서 저장하고 무엇이 보여야 성공인지 알려줘라.
+- 내가 실행한 결과를 확인한 뒤 다음 단계로 넘어가라.
+- 화면이 다르면 메뉴 위치를 추측하지 말고 현재 화면을 확인해라.
+- 오류가 나면 실패한 위치를 찾아 설명하고, 원인이 확인되기 전에 재생성부터 시키지 마라.
+- 파라미터는 액션의 입력값, 속성은 배치에 정보를 저장하는 칸처럼 용어를 구체적인 예로 풀어라.
+- Preview에서 폼을 확인하는 것, Test run, 실제 Submit을 구분해라.
+
+먼저 전체 실습 흐름을 짧게 보여주고, 현재 환경과 데이터에서 이 시나리오가 가능한지 확인해라.
+첫 답변에서는 자산을 변경하지 말고, 내가 바로 할 일 한 단계만 안내해라.
+</pre></details><p class="source"><a href="prompt-tutor.md">프롬프트 MD 열기</a></p><aside hidden class="speaker">두 번째는 내가 직접 해보기 위한 방식입니다. AI에게 대신 만들라고 하지 않고, 무엇을 왜 하는지와 클릭할 곳, 입력값, 성공 확인 방법을 알려 달라고 했습니다. 처음 공유한 무제 5.md가 이 방향의 프롬프트이며 현재 실습에 맞게 다시 정리했습니다. 두 방식은 연속된 필수 순서가 아니라 서로 다른 활용 방식입니다.</aside></section>
+<section aria-labelledby="heading-10" class="slide" hidden data-title="데이터에서 온톨로지까지">
+<p class="eyebrow">05 / HANDS-ON · 데이터와 관계</p><h2 id="heading-10">식별자가 객체를 구분하고,<br>공통 키가 검사 근거를 연결한다</h2><div class="grid two"><div class="card"><h3>Pipeline Builder</h3><p>품질검사 원본 → 검사 식별자 추가 → 출력 Dataset</p><p><code>inspection_id = batch_id + '::' + test_item</code></p><div class="metric"><div class="big">60<small>검사 기록</small></div><div class="big">5<small>출력 컬럼</small></div></div><p class="small">inspection_id · batch_id · test_item · result · measured_value</p><p class="small">재검사로 같은 조합이 반복되면 회차 또는 별도 검사 ID가 필요하다.</p></div><div class="card"><h3>Ontology Manager</h3><div class="flow"><div><span class="big">30</span><p>배치출하검토</p><code>PK: batch_id</code></div><span class="arrow">1 → N</span><div><span class="big">60</span><p>품질검사</p><code>PK: inspection_id</code></div></div><p>검사의 <code>batch_id</code>가 배치의 기본키를 참조한다.</p><p class="small">배치 하나를 열어 해당 검사 두 건을 확인했다.</p></div></div>
+<div class="statement">Dataset의 행을 준비하고 → 객체로 읽고 → 링크로 근거를 탐색한다.</div>
+<aside hidden class="speaker">검사 원본에는 검사 한 건을 구분할 식별자가 필요했습니다. 이번 데이터에서는 배치와 검사 항목을 합쳐 고유한 ID를 만들었습니다. 품질검사의 기본키와 배치를 연결하는 외래키는 역할이 다릅니다. 숫자는 기존 성공 브랜치의 실습 기록 기준입니다.</aside>
+</section>
+<section aria-labelledby="heading-11" class="slide" hidden data-title="선택한 배치에 검토 결과 저장">
+<p class="eyebrow">05 / HANDS-ON · 액션의 의미</p><h2 id="heading-11">선택한 배치에<br>검토 결과를 저장한다</h2><p class="lead">DEMO-01-02 배치를 열고, 보류와 사유를 입력한 뒤 ‘출하 검토 기록’을 실행한다.</p>
+<div class="grid two"><div class="card"><h3>배치에 저장되는 내용</h3><table><thead><tr><th scope="col">배치의 정보 칸(속성)</th><th scope="col">저장되는 내용</th></tr></thead><tbody><tr><td>검토 상태</td><td>보류</td></tr><tr><td>보류 사유</td><td>내용량 불합격으로 재검사 필요</td></tr><tr><td>판정자</td><td>실행한 사람 · 자동 기록</td></tr><tr><td>판정 시각</td><td>실행한 시각 · 자동 기록</td></tr></tbody></table></div><div class="card"><h3>기존 배치에 판단을 남기는 것</h3><p><strong class="accent">사람이 입력</strong><br>검토 상태를 선택하고 판단 이유를 적는다.</p><p><strong class="accent">액션으로 저장</strong><br>선택한 배치의 검토 정보 칸에 기록한다.</p><p><strong class="accent">검사 근거는 유지</strong><br>기존 검사 결과와 측정값은 그대로 남는다.</p></div></div><div class="statement rule">보류를 선택하면 → 보류 사유를 <b>반드시 입력</b>한다.</div>
+<aside hidden class="speaker">예를 들어 이미 있는 DEMO-01-02 배치를 열고 보류를 선택한 뒤 내용량 불합격으로 재검사 필요라고 입력합니다. 출하 검토 기록 액션을 실행하면 그 배치에 검토 상태와 사유가 저장되고 실행한 사람과 시각도 함께 남습니다. 배치를 새로 만드는 것이 아니라 기존 배치에 검토 내용을 기록하는 것입니다. 여기서 속성은 배치의 정보를 담는 칸입니다. 검사 결과와 측정값을 바꾸는 액션은 아닙니다. 설정에서는 판정자에 Current User, Timestamp 타입 판정 시각에 Current Time을 연결했습니다. 보류 사유는 보류일 때만 Required override로 필수가 되게 했습니다.</aside>
+</section>
+<section aria-labelledby="heading-12" class="slide" hidden data-title="실행 결과와 규칙 체험">
+<p class="eyebrow">05 / ACTION · 입력에서 기록으로</p><h2 id="heading-12">보류를 선택하면 이유를 묻고,<br>제출하면 판단이 기록된다</h2><div class="grid two"><div class="card"><span class="tag ok">기존 실습 흐름 · 값은 공개용 예시</span><h3>DEMO-01-02</h3><table><tbody><tr><td>내용량 / 점도</td><td><span class="bad">불합격 98.20</span> / 합격 5100</td></tr><tr><td>검토 상태</td><td>보류</td></tr><tr><td>보류 사유</td><td>[실습] 내용량 검사 불합격으로 재검사 필요</td></tr><tr><td>판정자 · 시각</td><td>실행한 사용자 · 실행 시각</td></tr></tbody></table><p class="small" style="margin-top:15px">review-practice · Submit 후 객체 속성 반영 확인<br>Test run은 변경 예정 값 확인, 실제 저장은 Submit으로 확인</p></div><div class="card"><span class="tag warn">설명용 체험 · Foundry 연결 없음</span><div class="demo-controls"><label for="status">검토 상태</label><select id="status"><option>검토중</option><option selected>보류</option><option>승인</option></select><label for="reason">보류 사유 <span id="required" class="bad">필수</span></label><textarea id="reason" placeholder="빈 사유로 제출한 뒤, 사유를 입력해 비교해 보세요."></textarea><div style="display:flex;gap:8px;margin-top:10px"><button id="submitDemo" class="primary">예시 제출</button><button id="resetDemo">초기화</button></div></div><div id="feedback" role="status" aria-live="polite">보류는 사유가 필요합니다.</div><div id="demoResult" class="result"><p>제출 전: 예시 기록 없음</p></div></div></div>
+<aside hidden class="speaker">왼쪽은 기존 실습 기록이고 오른쪽은 이 HTML 안에서만 동작하는 설명용 예시입니다. 먼저 빈 사유로 제출해 실패를 보여주고, 사유를 넣어 성공을 보여줍니다. 승인으로 바꾸면 사유가 필수가 아닌 것도 확인합니다. 체험의 공백 검사와 사용자 표시는 설명용이며 Foundry의 모든 검증 규칙을 복제한 것은 아닙니다. 새 재실습 브랜치는 최종 실행 결과를 따로 확인해야 합니다.</aside>
+</section>
+<section aria-labelledby="heading-13" class="slide" hidden data-title="배운 점과 다음 실습">
+<p class="eyebrow">TAKEAWAYS · 다음에 다시 만들 때</p><h2 id="heading-13">이제 각 설정을<br><span class="accent">하나의 업무 흐름으로 설명할 수 있다</span></h2><div class="grid three"><div class="card"><span class="num">01</span><h3>책과 데이터는 설계 기준</h3><p>책의 원칙과 데이터의 한계를 함께 보고 판단 대상과 행동을 정한다.</p></div><div class="card"><span class="num">02</span><h3>공유 환경과 AI 활용</h3><p>공유 환경에서 실습하고, AI FDE에 구현을 요청하며 모르는 부분을 확인한다.</p></div><div class="card"><span class="num">03</span><h3>직접 실습은 연결 이해</h3><p>식별자·관계·입력·수정 결과를 직접 연결하며 의미를 익힌다.</p></div></div><div class="statement">배치 열기 → 검사 보기 → 검토 기록 → 속성 반영 확인</div><p class="lead" style="margin-top:25px">다음 실습: 새 브랜치에서 재현 완료 → 재검토 조건 → 권한과 이력</p><p class="small">기존 성공 기록과 새 재실습 브랜치는 구분한다. Main 반영·물류 연동·전체 이력 관리는 후속 범위다.</p><p class="source"><button onclick="go(13)">실습 따라하기 부록 →</button><br>내용 기준: 2026-09-08 실습 정리 · Chapter 10 장별 학습 노트 · AI FDE 구성 점검 대화<br><a href="presentation-notes.md">발표 내용 원고</a> · <a href="practice-summary.md">실습 상세 기록</a></p>
+<aside hidden class="speaker">새 브랜치에서 처음부터 재현하는 것은 발표 전 리허설로 진행하면 좋습니다. 이번에 완료한 범위는 판단을 객체 속성에 남기는 흐름입니다. 다음에는 상태별 실행 조건, 역할별 권한, 이전 결정을 남기는 이력까지 확장할 수 있습니다. 질문은 어떤 대상을 판단하고 어떤 행동을 남길지에 연결해 받아보세요.</aside>
+</section>
+<section aria-labelledby="heading-14" class="slide" hidden data-title="실습 00 · 준비: 이번 실습에서 만들 것">
+<p class="eyebrow">WALKTHROUGH 00 / 처음부터 끝까지 따라하기</p><p class="small"><a href="practice-guide.md">전체 절차 MD 열기</a> · 목차에서 단계 선택 · 전체 보기로 펼쳐서 실습</p><h2 id="heading-14">준비: 이번 실습에서 만들 것</h2><p class="small">들어갈 곳: 공유 Foundry 환경 → 실습 프로젝트</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>만들 흐름</td><td>배치 선택 → 품질검사 확인 → 검토 상태·사유 입력 → 사용자·시각과 함께 저장</td></tr><tr><td>필요한 원본</td><td>batch_master 30행 / quality_inspection 60행. 현재 브랜치에서 실제 행이 조회되는 원본 사용</td></tr><tr><td>결과물</td><td>검사 출력 Dataset 1개 · Object Type 2개 · Link Type 1개 · Action Type 1개</td></tr><tr><td>필수 기록</td><td>프로젝트, 브랜치 이름·URL, 원본·출력 Dataset 이름, 두 Object Type과 Action 이름</td></tr><tr><td>예시 이름 사용 규칙</td><td>이후 영문 API 이름은 새로 만드는 경우의 제안. 기존 자산을 이어 하면 현재 이름을 유지하고 중복 생성하지 않기</td></tr><tr><td>완료 범위</td><td>검토 결과 저장까지. Main 병합·실제 출하 차단·중복 보류 방지·전체 이력 관리는 포함하지 않음</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 아직 저장 단계 아님. 원본과 작업 위치부터 확인.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 어느 브랜치에서 무엇을 만들지 설명할 수 있고 원본 두 개가 조회된다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">이 절차는 기존 성공 실습 기록을 순서대로 재구성했다. 현재 UI의 모든 생성 화면을 새로 재실행한 결과는 아니다. 메뉴 위치·자동 생성 이름은 환경에 따라 다를 수 있다. 설명 문구는 복사할 수 있도록 새로 작성한 예시다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 이 절차는 기존 성공 실습 기록을 순서대로 재구성했다. 현재 UI의 모든 생성 화면을 새로 재실행한 결과는 아니다. 메뉴 위치·자동 생성 이름은 환경에 따라 다를 수 있다. 설명 문구는 복사할 수 있도록 새로 작성한 예시다.</aside></section>
+<section aria-labelledby="heading-15" class="slide" hidden data-title="실습 01 · 브랜치와 원본 데이터를 확인한다">
+<p class="eyebrow">WALKTHROUGH 01 / 처음부터 끝까지 따라하기</p><h2 id="heading-15">브랜치와 원본 데이터를 확인한다</h2><p class="small">들어갈 곳: Ontology Manager → 브랜치 선택 / 프로젝트의 Dataset</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>브랜치</td><td>새 실습이면 Create new branch. 예: review-practice-new. 이어 하면 기존 실습 브랜치 선택</td></tr><tr><td>브랜치 설명 예시</td><td>배치별 품질검사 확인 후 출하 검토 결과를 기록하는 실습</td></tr><tr><td>batch_master 확인</td><td>batch_id, manufacture_date, product_code, recipe_id. 30행 / batch_id 고유 30개 / 빈 키 없음</td></tr><tr><td>quality_inspection 확인</td><td>batch_id, test_item, result, measured_value. 60행 / 배치당 검사 2건</td></tr><tr><td>원본이 없는 경우</td><td>프로젝트에 03.batch_master.csv와 07.quality_inspection.csv를 Dataset으로 가져온 후 열 구분·헤더·타입·행 수 확인</td></tr><tr><td>브랜치별 데이터 확인</td><td>다른 브랜치의 출력 이름만 보고 재사용하지 않기. 현재 브랜치에서 스키마와 실제 행이 보여야 함</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 브랜치 생성 완료 후 이름과 URL 기록. Dataset 가져오기를 했다면 행 조회까지 확인.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 배치30행·검사60행이 보이고, 두 데이터의 batch_id가 연결 가능하다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">브랜치를 만들었다고 모든 데이터가 복제되는 것은 아니다. 이 가이드는 조회 가능한 원본 Dataset에서 시작한다. 없으면 원본 가져오기를 먼저 끝낸다. 원본의 불일치를 임의로 수정하지 않는다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 브랜치를 만들었다고 모든 데이터가 복제되는 것은 아니다. 이 가이드는 조회 가능한 원본 Dataset에서 시작한다. 없으면 원본 가져오기를 먼저 끝낸다. 원본의 불일치를 임의로 수정하지 않는다.</aside></section>
+<section aria-labelledby="heading-16" class="slide" hidden data-title="실습 02 · Pipeline Builder에서 검사 식별자를 만든다">
+<p class="eyebrow">WALKTHROUGH 02 / 처음부터 끝까지 따라하기</p><h2 id="heading-16">Pipeline Builder에서 검사 식별자를 만든다</h2><p class="small">들어갈 곳: Pipeline Builder → 새 파이프라인 → 검사 원본 추가</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>입력</td><td>현재 브랜치에서 조회되는 quality_inspection Dataset</td></tr><tr><td>추가할 컬럼</td><td>inspection_id · String</td></tr><tr><td>계산 내용</td><td>batch_id + 구분자 :: + test_item. 예: DEMO-01-02::내용량. 문자열 이어붙이기 변환으로 구성</td></tr><tr><td>출력할 컬럼</td><td>inspection_id(String), batch_id(String), test_item(String), result(String), measured_value(Double)</td></tr><tr><td>출력 Dataset 이름 예시</td><td>quality_inspection_for_ontology_practice_0909. 이미 검증된 출력이 있으면 재사용 가능</td></tr><tr><td>파이프라인 설명 예시</td><td>품질검사에 고유 inspection_id를 추가해 객체 생성과 배치 연결에 사용한다</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 출력 Dataset 연결 → 저장 → Deploy/실행 → 빌드 성공 확인.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 출력60행 / 검사 ID 고유60개 / 빈 ID0개 / 배치 연결 누락0개. 원천 검사 결과·측정값은 유지된다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">위 계산은 의미를 설명한 식이며 UI의 코드 입력 문법을 뜻하지 않는다. Add column 또는 문자열 연결 변환에서 해당 컬럼과 상수를 지정한다. 같은 배치의 같은 항목을 재검사하면 ID가 중복될 수 있으므로 별도 검사 ID나 회차가 필요하다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 위 계산은 의미를 설명한 식이며 UI의 코드 입력 문법을 뜻하지 않는다. Add column 또는 문자열 연결 변환에서 해당 컬럼과 상수를 지정한다. 같은 배치의 같은 항목을 재검사하면 ID가 중복될 수 있으므로 별도 검사 ID나 회차가 필요하다.</aside></section>
+<section aria-labelledby="heading-17" class="slide" hidden data-title="실습 03 · 배치출하검토 Object Type을 만든다">
+<p class="eyebrow">WALKTHROUGH 03 / 처음부터 끝까지 따라하기</p><h2 id="heading-17">배치출하검토 Object Type을 만든다</h2><p class="small">들어갈 곳: Ontology Manager → New → Object type → Use existing datasource</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>Display name / 복수 표시 이름</td><td>배치출하검토 / 배치출하검토</td></tr><tr><td>API name 예시</td><td>BatchShipmentReviewPractice0909 · 충돌 없는 새 이름 사용</td></tr><tr><td>Description</td><td>배치별 품질검사 근거를 확인하고 출하 검토 상태와 판단 사유를 기록한다.</td></tr><tr><td>Datasource</td><td>1단계에서 확인한 batch_master</td></tr><tr><td>Primary key / Title</td><td>둘 다 batch_id. 기본키는 객체 식별용, Title은 목록에 보여줄 대표값</td></tr><tr><td>원천 속성 매핑</td><td>Batch Id ← batch_id / Manufacture Date ← manufacture_date / Product Code ← product_code / Recipe Id ← recipe_id. 기존 실습은 네 속성 모두 String</td></tr><tr><td>Allow edits / Edits</td><td>배치출하검토의 편집 허용을 켜고 Edits Enabled 상태 확인</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 생성 화면에서 완료 → Save to branch → 변경사항 확인 화면에서 저장.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 타입에 원천 속성4개, 기본키와 Title=batch_id, 올바른 데이터 소스가 표시된다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">같은 목적의 객체가 이미 있으면 이름만 같다고 새로 만들지 말고 기본키·데이터 소스·속성을 확인해 재사용한다. 기존 날짜 속성 타입이 다르면 원천 형식과 일치하는지 확인한다. Pipeline Builder가 관리하는 객체가 편집 불가로 표시되면 생성 위치와 편집 범위를 먼저 확인한다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 같은 목적의 객체가 이미 있으면 이름만 같다고 새로 만들지 말고 기본키·데이터 소스·속성을 확인해 재사용한다. 기존 날짜 속성 타입이 다르면 원천 형식과 일치하는지 확인한다. Pipeline Builder가 관리하는 객체가 편집 불가로 표시되면 생성 위치와 편집 범위를 먼저 확인한다.</aside></section>
+<section aria-labelledby="heading-18" class="slide" hidden data-title="실습 04 · 품질검사 Object Type을 만든다">
+<p class="eyebrow">WALKTHROUGH 04 / 처음부터 끝까지 따라하기</p><h2 id="heading-18">품질검사 Object Type을 만든다</h2><p class="small">들어갈 곳: Ontology Manager → New → Object type → Use existing datasource</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>Display name / 복수 표시 이름</td><td>품질검사 / 품질검사</td></tr><tr><td>API name 예시</td><td>QualityInspectionPractice0909 · 기존 이름과 충돌하지 않게 지정</td></tr><tr><td>Description</td><td>배치별 검사 항목, 측정값, 합격·불합격 결과를 조회한다.</td></tr><tr><td>Datasource</td><td>2단계에서 빌드 성공한 검사 출력 Dataset. inspection_id가 있는 출력 선택</td></tr><tr><td>Primary key / Title</td><td>둘 다 inspection_id. batch_id는 같은 배치에 검사2건이 있어 기본키로 사용하지 않음</td></tr><tr><td>속성 매핑과 타입</td><td>Inspection Id ← inspection_id(String), Batch Id ← batch_id(String), Test Item ← test_item(String), Result ← result(String), Measured Value ← measured_value(Double)</td></tr><tr><td>검사 편집</td><td>이번 액션은 검사 결과를 수정하지 않음. 검사값은 원본 결과를 유지</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 생성 완료 → Save to branch. 배치출하검토와 같은 브랜치인지 확인.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 속성5개, 기본키=inspection_id. 객체 데이터가 준비되면 검사60건이 조회된다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">inspection_id는 검사 한 건을 구분하고 batch_id는 어느 배치의 검사인지 알려준다. 두 키의 역할을 구분한다. Property ID나 API 이름이 자동 생성되면 기록하고, 이미 연결된 식별자를 임의로 바꾸지 않는다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. inspection_id는 검사 한 건을 구분하고 batch_id는 어느 배치의 검사인지 알려준다. 두 키의 역할을 구분한다. Property ID나 API 이름이 자동 생성되면 기록하고, 이미 연결된 식별자를 임의로 바꾸지 않는다.</aside></section>
+<section aria-labelledby="heading-19" class="slide" hidden data-title="실습 05 · 배치에 검토용 Property 4개를 추가한다">
+<p class="eyebrow">WALKTHROUGH 05 / 처음부터 끝까지 따라하기</p><h2 id="heading-19">배치에 검토용 Property 4개를 추가한다</h2><p class="small">들어갈 곳: 배치출하검토 → Properties → Create Property → Data</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>검토 상태</td><td>API 예시 reviewStatus / String / Description: 사람이 선택한 출하 검토 결과. 검토중, 보류, 승인 중 하나를 기록한다.</td></tr><tr><td>보류 사유</td><td>API 예시 holdReason / String / Description: 배치를 보류한 이유. 검토 상태가 보류일 때 반드시 입력한다.</td></tr><tr><td>판정자</td><td>API 예시 decidedBy / String / Description: 출하 검토 기록 액션을 실행한 사용자.</td></tr><tr><td>판정 시각</td><td>API 예시 decidedAt / Timestamp / Description: 출하 검토 기록 액션을 실행한 날짜와 시각.</td></tr><tr><td>네 속성 공통 Data 설정</td><td>Edit-only property. 원본 컬럼을 연결하지 않고 액션이 값을 기록하도록 설정</td></tr><tr><td>권한 기준 Dataset을 요구하면</td><td>배치 객체의 권한 기준 Dataset 확인·선택. 입력값을 읽어올 원천 컬럼 선택과 다른 설정</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 각 속성 추가 후 Save to branch. 기본4개 + 검토4개 = 총8개 확인.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 검토용 네 속성이 저장돼 있고 판정 시각만 Timestamp다. 기존 속성과 중복되지 않는다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">표시 이름은 화면에서 읽는 이름, API 이름은 코드에서 구분하는 이름이다. 설명에 필수라고 적는 것만으로 입력이 강제되지는 않는다. 실제 필수 규칙은 액션에서 설정한다. 빈 검토 상태는 아직 기록되지 않은 상태이며 미검토라는 값이 자동 저장된 것은 아니다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 표시 이름은 화면에서 읽는 이름, API 이름은 코드에서 구분하는 이름이다. 설명에 필수라고 적는 것만으로 입력이 강제되지는 않는다. 실제 필수 규칙은 액션에서 설정한다. 빈 검토 상태는 아직 기록되지 않은 상태이며 미검토라는 값이 자동 저장된 것은 아니다.</aside></section>
+<section aria-labelledby="heading-20" class="slide" hidden data-title="실습 06 · 배치와 검사를 Link Type으로 연결한다">
+<p class="eyebrow">WALKTHROUGH 06 / 처음부터 끝까지 따라하기</p><h2 id="heading-20">배치와 검사를 Link Type으로 연결한다</h2><p class="small">들어갈 곳: Ontology Manager → New → Link type → Object type foreign keys</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>Many 쪽 Object Type</td><td>품질검사</td></tr><tr><td>Foreign key 속성</td><td>품질검사의 batch_id / Batch Id</td></tr><tr><td>One 쪽 Object Type</td><td>배치출하검토</td></tr><tr><td>상대 기본키</td><td>배치출하검토의 batch_id / Batch Id</td></tr><tr><td>관계 방향</td><td>배치1건 : 품질검사여러 건. 검사1건은 배치1건에 연결</td></tr><tr><td>양방향 이름</td><td>배치에서 보는 연결 목록: 품질검사 / 검사에서 보는 연결 대상: 배치출하검토</td></tr><tr><td>API·설명 입력칸이 있으면</td><td>방향별 고유 API 이름 지정. 설명 예시: 배치별 품질검사를 batch_id로 연결해 검토 근거를 확인한다.</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> Link Type 생성 완료 → Save to branch.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 양쪽 타입과 키가 맞고, 데이터 준비 후 DEMO-01-02에서 내용량·점도2건이 연결된다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">검사의 inspection_id를 배치 키에 연결하면 안 된다. inspection_id는 검사 자체의 키이고 배치를 찾는 값은 batch_id다. 타입 두 개가 같은 브랜치에 있어야 한다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 검사의 inspection_id를 배치 키에 연결하면 안 된다. inspection_id는 검사 자체의 키이고 배치를 찾는 값은 batch_id다. 타입 두 개가 같은 브랜치에 있어야 한다.</aside></section>
+<section aria-labelledby="heading-21" class="slide" hidden data-title="실습 07 · 출하 검토 기록 Action Type을 만든다">
+<p class="eyebrow">WALKTHROUGH 07 / 처음부터 끝까지 따라하기</p><h2 id="heading-21">출하 검토 기록 Action Type을 만든다</h2><p class="small">들어갈 곳: Ontology Manager → New → Action type</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>Display name</td><td>출하 검토 기록</td></tr><tr><td>API name 예시</td><td>record-batch-review-practice-0909 · 입력칸의 유효성 검사와 이름 충돌 확인</td></tr><tr><td>Description</td><td>선택한 배치의 검토 상태와 보류 사유를 저장하고, 실행한 사용자와 시각을 함께 기록한다.</td></tr><tr><td>규칙 종류</td><td>Modify object · 기존 객체 수정. Create object로 새 배치를 만드는 흐름이 아님</td></tr><tr><td>수정할 Object Type</td><td>현재 브랜치의 배치출하검토</td></tr><tr><td>대상 객체 Parameter</td><td>배치출하검토 객체1개를 받는 파라미터 사용. 자동 생성됐으면 재사용</td></tr><tr><td>규칙의 대상 연결</td><td>Modify 규칙이 위 대상 객체 파라미터를 참조하도록 연결. Parameter is missing 오류 없어야 함</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 생성 마법사를 완료하고 초안의 Rules·Parameters를 이어서 설정한다.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 수정 대상이 배치출하검토이고, 어느 객체를 수정할지 받는 대상 파라미터가 있다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">자동 생성 액션과 New 방식은 화면 순서가 다를 수 있다. 입력 파라미터가 이미 있으면 같은 것을 두 번 만들지 않는다. Parameters가 안 보이면 우선 올바른 액션·브랜치와 대상 규칙이 구성됐는지 확인한다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 자동 생성 액션과 New 방식은 화면 순서가 다를 수 있다. 입력 파라미터가 이미 있으면 같은 것을 두 번 만들지 않는다. Parameters가 안 보이면 우선 올바른 액션·브랜치와 대상 규칙이 구성됐는지 확인한다.</aside></section>
+<section aria-labelledby="heading-22" class="slide" hidden data-title="실습 08 · 사람이 입력할 Parameter를 설정한다">
+<p class="eyebrow">WALKTHROUGH 08 / 처음부터 끝까지 따라하기</p><h2 id="heading-22">사람이 입력할 Parameter를 설정한다</h2><p class="small">들어갈 곳: 출하 검토 기록 → Parameters</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>대상 배치</td><td>Object reference / 배치출하검토1개 / 필수. 설명: 검토 결과를 기록할 배치</td></tr><tr><td>검토 상태</td><td>String / 선택지: 검토중, 보류, 승인 / Required 켜기</td></tr><tr><td>검토 상태 설명</td><td>검토 결과를 선택한다. 보류를 선택하면 보류 사유를 입력한다.</td></tr><tr><td>보류 사유</td><td>String / 기본 Required 끄기 / 사람이 이유를 적는 입력칸으로 표시</td></tr><tr><td>보류 사유 설명</td><td>내용량 불합격 등 배치를 보류하는 이유를 입력한다.</td></tr><tr><td>판정자·판정 시각</td><td>사용자에게 입력받을 파라미터는 만들지 않음. Rules에서 자동 값 연결</td></tr><tr><td>미리보기 확인</td><td>검토 상태의 세 선택지와 보류 사유 입력칸이 보인다. 입력해야 할 칸이 숨김 처리돼 있지 않은지 확인</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> Parameters 설정을 유지하고 다음 Rules 설정으로 이동.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 입력값은 대상 배치·검토 상태·보류 사유의3개. 불필요한 New parameter가 남지 않는다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">UI가 단일 선택을 제공하는 위치에서 선택지 세 개를 설정한다. Form/Layout이 별도로 있다면 해당 입력칸이 표시되는지 확인한다. 실제 표시 여부를 미리보기로 확인하는 것이 완료 기준이다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. UI가 단일 선택을 제공하는 위치에서 선택지 세 개를 설정한다. Form/Layout이 별도로 있다면 해당 입력칸이 표시되는지 확인한다. 실제 표시 여부를 미리보기로 확인하는 것이 완료 기준이다.</aside></section>
+<section aria-labelledby="heading-23" class="slide" hidden data-title="실습 09 · 입력값과 저장할 속성을 연결한다">
+<p class="eyebrow">WALKTHROUGH 09 / 처음부터 끝까지 따라하기</p><h2 id="heading-23">입력값과 저장할 속성을 연결한다</h2><p class="small">들어갈 곳: 출하 검토 기록 → Rules → Modify 배치출하검토</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>수정 대상</td><td>8단계의 대상 배치 파라미터</td></tr><tr><td>검토 상태 속성</td><td>값의 출처: Parameter → 검토 상태</td></tr><tr><td>보류 사유 속성</td><td>값의 출처: Parameter → 보류 사유</td></tr><tr><td>판정자 속성</td><td>값의 출처: Current User</td></tr><tr><td>판정 시각 속성</td><td>값의 출처: Current Time</td></tr><tr><td>Current Time이 안 보이면</td><td>배치 객체의 판정 시각 타입이 Timestamp인지 확인 → 타입·속성 저장 → 액션 규칙 다시 확인</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 규칙과 입력값 연결을 저장한다. 필수 오류가 있으면 다음 단계 전에 해결.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> Modify 대상1개, 변경할 속성4개. 파라미터 누락이나 연결되지 않은 입력값이 없다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">입력 파라미터는 액션이 전달받는 값이고 속성은 배치의 저장 칸이다. 보류를 선택하면 검토 상태 칸에 보류를 저장하도록 연결한다. 검사 결과와 측정값을 수정하는 규칙은 추가하지 않는다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 입력 파라미터는 액션이 전달받는 값이고 속성은 배치의 저장 칸이다. 보류를 선택하면 검토 상태 칸에 보류를 저장하도록 연결한다. 검사 결과와 측정값을 수정하는 규칙은 추가하지 않는다.</aside></section>
+<section aria-labelledby="heading-24" class="slide" hidden data-title="실습 10 · 보류일 때만 사유가 필수가 되게 한다">
+<p class="eyebrow">WALKTHROUGH 10 / 처음부터 끝까지 따라하기</p><h2 id="heading-24">보류일 때만 사유가 필수가 되게 한다</h2><p class="small">들어갈 곳: Parameters → 보류 사유 → General → Required</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>1. 기본값</td><td>Required 끄기</td></tr><tr><td>2. 예외 추가</td><td>Add override → IF 영역의 condition</td></tr><tr><td>3. 비교할 값</td><td>Based on → Parameter → 검토 상태</td></tr><tr><td>4. 비교 조건</td><td>Is equal to</td></tr><tr><td>5. 비교 대상</td><td>Compare against → Static value → String → 보류</td></tr><tr><td>6. 조건이 맞으면</td><td>THEN → Is Required 켜기</td></tr><tr><td>7. 완료</td><td>Done → Save to branch → 변경사항 확인 화면에서 Save to branch</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> Required 아래 1 override와 저장 완료 상태 확인.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 미리보기에서 검토중·승인은 필수 표시 없음, 보류에서만 사유 필수 표시.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">기본 Required까지 켜면 모든 상태에서 사유가 필수가 된다. 보류일 때만 켜려면 기본값을 끄고 override를 추가한다. 공백만 입력하는 경우의 처리와 중복 보류 금지는 별도 검증·조건이며 이번 완료 범위에 자동 포함되지 않는다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 기본 Required까지 켜면 모든 상태에서 사유가 필수가 된다. 보류일 때만 켜려면 기본값을 끄고 override를 추가한다. 공백만 입력하는 경우의 처리와 중복 보류 금지는 별도 검증·조건이며 이번 완료 범위에 자동 포함되지 않는다.</aside></section>
+<section aria-labelledby="heading-25" class="slide" hidden data-title="실습 11 · 저장·조회·Test run을 확인한다">
+<p class="eyebrow">WALKTHROUGH 11 / 처음부터 끝까지 따라하기</p><h2 id="heading-25">저장·조회·Test run을 확인한다</h2><p class="small">들어갈 곳: 브랜치 변경 목록 / 객체 데이터 상태 / 액션 Test run</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>저장 확인</td><td>객체2개·링크1개·액션1개가 같은 브랜치에 저장됐는지 확인. 저장 오류 해결</td></tr><tr><td>객체 데이터 준비</td><td>현재 브랜치에서 배치와 검사 데이터 인덱싱이 완료됐는지 확인. 준비 요청이 표시되면 해당 브랜치의 두 타입 데이터 준비 진행</td></tr><tr><td>조회 확인</td><td>배치30건·검사60건. DEMO-01-02와 연결된 검사2건 조회</td></tr><tr><td>편집·권한 확인</td><td>배치 Edits Enabled. 현재 사용자에게 대상 객체 편집·액션 실행 권한이 있는지 확인. 기존 제출 조건과 권한을 임의로 삭제하지 않음</td></tr><tr><td>Test run 입력</td><td>대상 DEMO-01-02 / 검토 상태 보류 / 사유 [실습] 내용량 검사 불합격으로 재검사 필요</td></tr><tr><td>변경 예정 값 확인</td><td>검토 상태·사유·판정자·판정 시각이 의도한 값인지 확인. Test run만으로 실제 저장 완료라고 판단하지 않음</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> 모든 정의 저장과 데이터 준비를 완료한다. Test run 뒤 실제 제출은 다음 단계.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 액션이 선택한 배치의 검토 속성4개만 바꾸려고 하고, 실제 객체와 링크를 조회할 수 있다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">타입 생성은 틀을 정의하는 일이고 인덱싱은 그 틀로 실제 데이터를 조회할 수 있게 준비하는 일이다. 0 objects이면 원천·출력 행, 브랜치, 인덱싱 상태를 차례로 본다. Unknown Resource가 보이면 객체 참조와 브랜치를 확인하고, 원인이 확인되지 않은 상태를 해결 완료라고 적지 않는다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 타입 생성은 틀을 정의하는 일이고 인덱싱은 그 틀로 실제 데이터를 조회할 수 있게 준비하는 일이다. 0 objects이면 원천·출력 행, 브랜치, 인덱싱 상태를 차례로 본다. Unknown Resource가 보이면 객체 참조와 브랜치를 확인하고, 원인이 확인되지 않은 상태를 해결 완료라고 적지 않는다.</aside></section>
+<section aria-labelledby="heading-26" class="slide" hidden data-title="실습 12 · Insight에서 실제 제출하고 결과를 확인한다">
+<p class="eyebrow">WALKTHROUGH 12 / 처음부터 끝까지 따라하기</p><h2 id="heading-26">Insight에서 실제 제출하고 결과를 확인한다</h2><p class="small">들어갈 곳: 배치출하검토 → Overview → Open in → Insight</p>
+<table><thead><tr><th scope="col">설정 항목 / 순서</th><th scope="col">입력하거나 확인할 값</th></tr></thead><tbody><tr><td>1. 대상 열기</td><td>실습 브랜치 확인 → Title에서 DEMO-01-02 더블클릭</td></tr><tr><td>2. 검사 근거 확인</td><td>Linked objects → 내용량 불합격98.20 / 점도 합격5100 확인</td></tr><tr><td>3. 액션 선택</td><td>Actions → 출하 검토 기록 → 자동 지정된 배치 확인</td></tr><tr><td>4. 값 입력</td><td>검토 상태 보류 / 사유 [실습] 내용량 검사 불합격으로 재검사 필요</td></tr><tr><td>5. 실제 기록</td><td>Submit → Edits successfully applied. 메시지 확인</td></tr><tr><td>6. 저장 결과 확인</td><td>Properties에서 보류·입력한 사유·실행한 사용자·이번 실행 시각 확인. 다시 조회해도 값이 남는지 확인</td></tr><tr><td>7. 실습 완료 기록</td><td>브랜치·대상 배치·액션·결과·실행 시각 기록. 기존 성공 기록의실행 당시 시각는 과거 예시이며 현재 기대값이 아님</td></tr></tbody></table>
+<p style="margin-top:18px"><strong class="accent">저장:</strong> Submit이 실제 기록 단계다. 저장 결과까지 확인한 뒤 실습을 마친다.</p><div class="statement" style="font-size:20px"><strong>완료 확인:</strong> 배치에 검토 결과가 남고 기존 검사 측정값은 유지된다. 다음에 이어 할 때 사용할 브랜치와 마지막 성공 단계를 기록했다.</div>
+<details style="margin-top:16px"><summary>막힐 때 / 추가 설명</summary><p class="small" style="margin-top:10px">검토 값은 다시 실행하면 갱신된다. 이 속성만으로 이전 결정의 전체 이력이 보존되지는 않는다. 기존 성공 브랜치는 review-practice였고 새 브랜치 재실습은 자신의 결과를 별도로 확인해야 한다.</p></details>
+<aside hidden class="speaker">이 부록은 전체를 발표하기보다 실습하면서 확인하는 용도입니다. 검토 값은 다시 실행하면 갱신된다. 이 속성만으로 이전 결정의 전체 이력이 보존되지는 않는다. 기존 성공 브랜치는 review-practice였고 새 브랜치 재실습은 자신의 결과를 별도로 확인해야 한다.</aside></section>
+</main>
+<aside id="notes" hidden><h3>발표 메모 · N 키로 닫기</h3><p id="noteText"></p></aside>
+<dialog id="toc"><h3>발표 목차</h3><div id="tocList"></div><button id="closeToc">닫기</button></dialog>
+<footer><div class="progress" id="progress"></div><span class="small footer-hint">← → 이동 · N 메모 · F 전체 화면</span><div class="dots" id="dots" aria-label="슬라이드 선택"></div><div class="nav"><button id="prev" aria-label="이전 슬라이드">← 이전</button><span id="counter" aria-live="polite"></span><button id="next" aria-label="다음 슬라이드">다음 →</button></div></footer>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;const $=id=>document.getElementById(id);
+function go(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.hidden=i!==current);$('counter').textContent=`${current+1} / ${slides.length}`;$('progress').style.width=`${(current+1)/slides.length*100}%`;$('prev').disabled=current===0;$('next').disabled=current===slides.length-1;$('noteText').textContent=slides[current].querySelector('.speaker').textContent;[...$('dots').children].forEach((b,i)=>{if(i===current)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});history.replaceState(null,'',`#slide-${current+1}`);if(document.body.classList.contains('overview'))slides[current].scrollIntoView({block:'start'});else window.scrollTo(0,0);clearFit()}
+function clearFit(){slides.forEach(s=>{s.style.zoom='';s.style.minHeight='';});}
+function fitSlide(){clearFit();if(innerWidth<=800||document.body.classList.contains('overview'))return;const s=slides[current];s.style.minHeight='0';let z=1;const available=innerHeight-document.querySelector('header').offsetHeight-document.querySelector('.public-note').offsetHeight-63;for(let i=0;i<3;i++){const h=s.getBoundingClientRect().height;if(h<=available)break;z*=available/h;s.style.zoom=z;}}// Browser zoom changes the viewport: never counteract it with automatic shrinking.
+document.querySelectorAll('.prompt-full').forEach(d=>d.addEventListener('toggle',clearFit));window.addEventListener('resize',clearFit);$('fitBtn').onclick=fitSlide;
+slides.forEach((s,i)=>{let b=document.createElement('button');b.setAttribute('aria-label',`${i+1}. ${s.dataset.title}`);b.onclick=()=>go(i);$('dots').append(b);b=document.createElement('button');b.textContent=`${String(i+1).padStart(2,'0')}  ${s.dataset.title}`;b.onclick=()=>{$('toc').close();go(i)};$('tocList').append(b)});
+$('prev').onclick=()=>go(current-1);$('next').onclick=()=>go(current+1);$('tocBtn').onclick=()=>$('toc').showModal();$('closeToc').onclick=()=>$('toc').close();$('notesBtn').onclick=()=>{$('notes').hidden=!$('notes').hidden;$('notesBtn').setAttribute('aria-pressed',String(!$('notes').hidden))};$('allBtn').onclick=()=>{const active=document.body.classList.toggle('overview');$('allBtn').setAttribute('aria-pressed',String(active));$('allBtn').textContent=active?'슬라이드 보기':'전체 보기';go(current)};
+$('fullBtn').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){$('fullBtn').textContent='브라우저 F11 사용'}};document.addEventListener('fullscreenchange',()=>{$('fullBtn').textContent=document.fullscreenElement?'전체 화면 종료':'전체 화면'});
+document.addEventListener('keydown',e=>{if(e.target.closest('input,select,textarea,button')||$('toc').open)return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(current-1)}if(e.key==='Home'){e.preventDefault();go(0)}if(e.key==='End'){e.preventDefault();go(slides.length-1)}if(e.key.toLowerCase()==='n')$('notesBtn').click();if(e.key.toLowerCase()==='f')$('fullBtn').click();if(e.key==='Escape'){$('notes').hidden=true;$('notesBtn').setAttribute('aria-pressed','false')}});
+function syncRule(){const hold=$('status').value==='보류';$('required').textContent=hold?'필수':'선택';$('reason').required=hold;$('feedback').textContent=hold?'보류는 사유가 필요합니다.':'이 상태에서는 사유를 입력하지 않아도 됩니다.';$('feedback').className='small'}
+$('status').onchange=syncRule;$('submitDemo').onclick=()=>{const status=$('status').value,reason=$('reason').value.trim();if(status==='보류'&&!reason){$('feedback').textContent='제출 실패: 보류 사유를 입력하세요. 기존 예시 기록은 유지됩니다.';$('feedback').className='bad';return}$('feedback').textContent='제출 성공: 아래 예시 기록을 갱신했습니다.';$('feedback').className='good';$('demoResult').replaceChildren();let p=document.createElement('p');p.textContent='제출 후 · 이 페이지 안의 예시 기록';$('demoResult').append(p);const dl=document.createElement('dl');for(const [k,v]of [['검토 상태',status],['보류 사유',reason||'입력 없음'],['판정자','발표 체험 사용자'],['판정 시각',new Date().toLocaleString('ko-KR')]]){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=k;dd.textContent=v;dl.append(dt,dd)}$('demoResult').append(dl)};$('resetDemo').onclick=()=>{$('status').value='보류';$('reason').value='';$('demoResult').textContent='제출 전: 예시 기록 없음';syncRule()};syncRule();go((Number(location.hash.match(/^#slide-(\d+)$/)?.[1])||1)-1);
+</script>
+</body>
+</html>
